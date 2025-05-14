@@ -10,7 +10,7 @@ by adding `storage_image_downloader` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:storage_image_downloader, "~> 0.1.0"}
+    {:storage_image_downloader, github: "drikanius/storage_image_downloader"}
   ]
 end
 ```

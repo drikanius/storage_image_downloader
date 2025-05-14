@@ -24,3 +24,6 @@ ash_query_builder-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# visual code setting
+/.vscode/
