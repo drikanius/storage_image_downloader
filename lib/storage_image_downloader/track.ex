@@ -8,8 +8,9 @@ defmodule StorageImageDownloader.Track do
   def get_url(%Resource{url: url} = _) do
     {:ok, response} = Req.get(url, redirect: false)
 
-    [redirect_url] = response.headers["location"]
-
-    redirect_url
+    case Map.get(response.headers, "location") do
+      nil -> nil
+      [redirect_url] -> redirect_url
+    end
   end
 end

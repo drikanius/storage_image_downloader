@@ -19,10 +19,11 @@ defmodule StorageImageDownloader do
   }
 
   def download(resource, validate_folder? \\ false) do
-    url = Track.get_url(resource)
+    track_url = Track.get_url(resource)
     save_location = resource.save_location
 
-    with :ok <- validate_save_location(save_location, validate_folder?) do
+    with {:ok, url} <- validate_url(track_url),
+         :ok <- validate_save_location(save_location, validate_folder?) do
       choose_behavior(resource, url)
     end
   end
@@ -40,9 +41,11 @@ defmodule StorageImageDownloader do
     end
   end
 
-  defp validate_save_location(folder_path, true) do
-    if File.dir?(folder_path), do: :ok, else: {:error, :invalid_folder_path}
-  end
+  defp validate_url(nil), do: {:error, :invalid_track_url}
+  defp validate_url(url), do: {:ok, url}
+
+  defp validate_save_location(folder_path, true),
+    do: if(File.dir?(folder_path), do: :ok, else: {:error, :invalid_folder_path})
 
   defp validate_save_location(_, _), do: :ok
 end
