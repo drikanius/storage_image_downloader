@@ -5,7 +5,7 @@ defmodule StorageImageDownloader.Track do
 
   def get_url(%Resource{try_redirect?: false} = resource), do: resource.url
 
-  def get_url(%Resource{url: url} = _) do
+  def get_url(%Resource{url: url}) do
     try do
       {:ok, response} = Req.get(url, redirect: false)
 
