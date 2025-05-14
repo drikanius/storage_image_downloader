@@ -4,7 +4,7 @@ defmodule StorageImageDownloader.MixProject do
   @app :storage_image_downloader
   @name "StorageImageDownloader"
   @description "A simple solution to download images from storage"
-  @version "0.1.1"
+  @version "0.1.2"
   @github "https://github.com/drikanius/#{@app}"
   @author "Jeferson Vieira Ramos"
   @license "MIT"
