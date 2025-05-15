@@ -65,7 +65,13 @@ defimpl StorageImageDownloader.ImageDownloader.Behaviour,
         {:error, :unauthenticated}
 
       {:ok, response} ->
-        response.body["files"] |> process_files(downloader)
+        files = response.body["files"]
+
+        if is_nil(files) do
+          {:error, :no_files}
+        else
+          response.body["files"] |> process_files(downloader)
+        end
 
       error ->
         error
